@@ -1,0 +1,61 @@
+# =============================================================================
+# GWASLab harmonization configuration
+# =============================================================================
+# Relative paths are resolved against the repository root (the directory from
+# which you run the CLI). Prefer absolute paths for large, externally managed
+# reference resources (FASTA / VCF), which are normally stored outside the repo.
+#
+# Every field below is validated by `gwaslab_harmonization.validation`. See
+# docs/reference_data.md for how to obtain the reference resources and
+# docs/results.md for how to interpret the output.
+# =============================================================================
+
+input:
+  # REQUIRED. Summary-statistics file to harmonize.
+  path: data/to_harmonize.tsv
+  # Optional. GWASLab input format identifier (see GWASLab "Format" docs).
+  format: gwaslab
+  # Optional. Extra input columns to carry through harmonization.
+  # The toy dataset uses NOTE to describe each variant's intended issue.
+  other_columns:
+    - NOTE
+
+reference:
+  # REQUIRED. Reference genome build the coordinates correspond to.
+  # One of: hg19, hg38 (aliases: 19/38, GRCh37/GRCh38).
+  genome_build: hg19
+  # Optional but strongly recommended: reference FASTA for allele alignment
+  # (maps to GWASLab `ref_seq`). Without it, reference-based allele checking and
+  # strand inference are skipped and the run is standardization-only.
+  # Obtain with:  python -c "import gwaslab as gl; print(gl.download_ref('ucsc_genome_hg19'))"
+  fasta_path: null
+  # Optional: reference VCF/BCF with allele frequencies for strand inference
+  # (maps to GWASLab `ref_infer`). Requires a matching tabix/CSI index.
+  # e.g. gl.download_ref('1kg_eas_hg19')
+  inference_vcf_path: null
+  # Optional: rsID reference resources (map to `ref_rsid_tsv` / `ref_rsid_vcf`).
+  rsid_tsv_path: null
+  rsid_vcf_path: null
+  # Allele-frequency INFO field used by `ref_infer` (maps to `ref_alt_freq`).
+  # Must be set when `inference_vcf_path` is set, and left null otherwise.
+  # Example: AF
+  allele_frequency_field: null
+
+harmonization:
+  # Run GWASLab's built-in standardization/QC before reference harmonization.
+  basic_check: true
+  # Worker threads (maps to GWASLab `threads`; the old `n_cores` name is gone).
+  threads: 1
+  # Remove variants flagged as bad by QC (maps to GWASLab `remove`).
+  remove: false
+  # MAF thresholds for palindromic-SNP strand inference.
+  maf_threshold: 0.40
+  ref_maf_threshold: 0.40
+
+output:
+  # Directory (created if missing). Relative to the repository root.
+  directory: results
+  # Output file name. Must not contain a directory separator.
+  filename: harmonized_sumstats.tsv
+  # GWASLab export format (maps to `Sumstats.to_format`).
+  save_format: gwaslab

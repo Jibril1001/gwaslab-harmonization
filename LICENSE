@@ -1,0 +1,27 @@
+# License status: DECISION PENDING
+
+No open-source license has been selected for this repository yet. The choice is
+left to the repository owner (Jibril1001) because it is legally consequential.
+
+Two facts are relevant to the decision:
+
+1. This repository **bundles the toy dataset** `data/to_harmonize.tsv`, which is
+   redistributed from the GWASLab project
+   (https://github.com/Cloufield/gwaslab), which is licensed under
+   **GPL-3.0-only**. Redistributing that file is permitted under GPL-3.0 with
+   attribution.
+2. The code and documentation in this repository are original and would be
+   compatible with a wide range of licenses.
+
+Recommended options (pick one and replace this file with the full license text):
+
+- **GPL-3.0-only** — matches GWASLab and the redistributed toy data; simplest
+  from a compliance standpoint.
+- **MIT** — permissive; keep the attribution note in `data/README.md` and be
+  aware that redistributing GPL-3.0 data alongside MIT code is a common but
+  non-trivial combination.
+
+Until a license is chosen, treat this repository as "all rights reserved" and do
+not assume it may be reused, modified, or redistributed.
+
+See `docs/decisions.md` for the full rationale.

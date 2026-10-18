@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.eggs/
+
+# Environments
+.venv/
+venv/
+env/
+
+# Testing / linting caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.tox/
+.nox/
+.coverage
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ---------------------------------------------------------------------------
+# Generated scientific data
+# ---------------------------------------------------------------------------
+# Generated results are not committed; only the placeholder is kept.
+results/*
+!results/.gitkeep
+
+# gwslab downloads its own reference resources into ~/.gwaslab by default, but
+# if a user configures in-repo reference directories we must never commit the
+# large genomic assets (FASTA / VCF / BCF and their indexes).
+reference/
+*.fa
+*.fasta
+*.fa.gz
+*.fasta.gz
+*.vcf
+*.vcf.gz
+*.bcf
+*.tbi
+*.csi
+*.bai
+
+# Logs / run manifests produced by the workflow
+*.log

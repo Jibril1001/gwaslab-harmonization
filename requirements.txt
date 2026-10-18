@@ -1,0 +1,14 @@
+# Convenience installer that reproduces the full local setup used for this
+# repository (runtime + notebook + tests). The authoritative dependency and
+# version definition is pyproject.toml.
+gwaslab>=4.2.3,<5
+PyYAML>=6.0
+
+# Notebook / tutorial
+jupyterlab>=4.0
+nbformat>=5.10
+nbconvert>=7.0
+
+# Tests / lint
+pytest>=7.4
+ruff>=0.6

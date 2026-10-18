@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gwaslab-harmonization"
+version = "0.1.0"
+description = "Educational, reproducible GWASLab workflow for harmonizing GWAS summary statistics against reference resources."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Jibril1001" }]
+keywords = ["gwas", "gwaslab", "harmonization", "summary-statistics", "bioinformatics"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+dependencies = [
+    # GWASLab 4.2.3 is the API version this repository was written against
+    # (verified against the published wheel source). See docs/decisions.md.
+    "gwaslab>=4.2.3,<5",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "ruff>=0.6",
+]
+notebook = [
+    "jupyterlab>=4.0",
+    "nbformat>=5.10",
+    "nbconvert>=7.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Jibril1001/gwaslab-harmonization"
+"GWASLab harmonization workflow" = "https://cloufield.github.io/gwaslab/harmonization_workflow/"
+"Related standardization tutorial" = "https://github.com/Jibril1001/gwaslab-standardization"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "tests", "scripts"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "UP", "B"]
+ignore = ["E501"]
